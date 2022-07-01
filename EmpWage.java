@@ -15,17 +15,16 @@ public class EmpWage {
         System.out.println("Welcome to Employee Wage Computation Program on Master Branch");
 
         Random random = new Random();
-        int attendance = random.nextInt(3);
+        int attendance;
         int total_working_days=0;
 
         int total_empl_hours=0;
         int total_empl_wage=0;
-        for (int i=0; i<TOTAL_WORKING_DAYS; i++) {
+        while ( total_empl_hours<=100 && total_working_days<20) {
             attendance = random.nextInt(3);
             switch (attendance) {
                 case IS_FULL_DAY:
                     total_empl_hours += FULL_DAY_HOUR;
-
                     total_working_days++;
                     break;
                 case IS_HALF_DAY:
@@ -41,6 +40,8 @@ public class EmpWage {
             }
         }
         total_empl_wage += WAGE_PER_HOUR * total_empl_hours;
-        System.out.println("Total wage:- " + total_empl_wage);
+        System.out.println("Total working days "+total_working_days);
+        System.out.println("Total working hours "+total_empl_hours);
+        System.out.println("Total wage for a month:- " + total_empl_wage);
     }
 }
