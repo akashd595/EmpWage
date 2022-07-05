@@ -12,8 +12,11 @@ public class EmpWage {
     private static final int TOTAL_WORKING_DAYS = 20;
 
     public static void main(String[] args) {
-        System.out.println("Welcome to Employee Wage Computation Program on Master Branch");
 
+        System.out.println("Welcome to Employee Wage Computation Program on Master Branch");
+        calculateEmpWage();
+    }
+    public static void calculateEmpWage(){
         Random random = new Random();
         int attendance;
         int total_working_days=0;
