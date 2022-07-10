@@ -7,39 +7,33 @@ public class EmpWage {
     private static final int HALF_DAY_HOUR = 4;
     static final int IS_FULL_DAY = 1;
     static final int IS_HALF_DAY = 2;
+    private int numOfCompany = 0;
+    private CompanyEmpWage[] companyEmpWageArray;
 
-    private String company;
-    private final int MAX_WORKING_HOURS;
-    private final int NUM_OF_WORKING_DAYS;
-    private final int EMP_WAGE_PER_HOUR;
-    public int total_empl_wage;
+    public EmpWage(){
+        companyEmpWageArray = new CompanyEmpWage[5];
+
+    }
+
+    private void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth){
+        companyEmpWageArray[numOfCompany] = new CompanyEmpWage(company, empRatePerHour, numOfWorkingDays, maxHoursPerMonth);
+        numOfCompany++;
+    }
+    private void computeEmpWage(){
+        for (int i=0; i<numOfCompany; i++){
+            companyEmpWageArray[i].setTotal_empl_wage(this.computeEmpWage(companyEmpWageArray[i]));
+            System.out.println(companyEmpWageArray[i]);
+        }
+    }
+
     public int total_empl_hours;
 
-    public EmpWage(String company, int maxWorkingHours, int numOfWorkingDays, int empWagePerHour) {
-        this.company = company;
-        this.MAX_WORKING_HOURS = maxWorkingHours;
-        this.NUM_OF_WORKING_DAYS = numOfWorkingDays;
-        this.EMP_WAGE_PER_HOUR = empWagePerHour;
-    }
-
-    public static void main(String[] args) {
-
-        System.out.println("Welcome to Employee Wage Computation Program on Master Branch");
-
-        EmpWage dMart = new EmpWage("DMart", 20, 5, 25);
-        dMart.calculateEmpWage();
-        System.out.println(dMart.toString());
-        EmpWage tata = new EmpWage("TATA", 20, 4, 40);
-        tata.calculateEmpWage();
-        System.out.println(tata.toString());
-
-    }
-    public void calculateEmpWage(){
+    public int computeEmpWage(CompanyEmpWage companyEmpWage){
         Random random = new Random();
         int attendance;
         int total_working_days=0;
 
-        while ( total_empl_hours <= MAX_WORKING_HOURS && total_working_days < NUM_OF_WORKING_DAYS) {
+        while ( total_empl_hours <= companyEmpWage.MAX_WORKING_HOURS && total_working_days < companyEmpWage.NUM_OF_WORKING_DAYS) {
             attendance = random.nextInt(3);
             switch (attendance) {
                 case IS_FULL_DAY:
@@ -54,16 +48,18 @@ public class EmpWage {
                     total_empl_hours = ABSENT_DAY_HOUR;
             }
         }
-        total_empl_wage += EMP_WAGE_PER_HOUR * total_empl_hours;
-//        System.out.println("Total working days "+total_working_days);
-//        System.out.println("Total working hours "+total_empl_hours);
-//        System.out.println("Total wage for the month:- " + total_empl_wage);
+        return total_empl_hours*companyEmpWage.EMP_WAGE_PER_HOUR;
 
     }
 
-    @Override
-    public String toString(){
-        return "Total emp wage for company "+company+" is "+total_empl_wage;
+    public static void main(String[] args) {
+
+        System.out.println("Welcome to Employee Wage Computation Program on Master Branch");
+
+        EmpWage empWage = new EmpWage();
+        empWage.addCompanyEmpWage("DMart", 20, 2, 10);
+        empWage.addCompanyEmpWage("TATA", 40, 4, 20);
+
+        empWage.computeEmpWage();
     }
 }
-
