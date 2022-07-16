@@ -1,7 +1,7 @@
 package com.EmpWage;
 import java.util.Random;
 
-public class EmpWage {
+public class EmpWage implements EmpWageBuilder{
     private static final int ABSENT_DAY_HOUR = 0;
     private static final int FULL_DAY_HOUR = 8;
     private static final int HALF_DAY_HOUR = 4;
