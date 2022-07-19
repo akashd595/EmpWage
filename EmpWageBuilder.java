@@ -1,5 +1,7 @@
 package com.EmpWage;
 
+import java.util.ArrayList;
+
 public interface EmpWageBuilder {
-    int computeEmpWage(CompanyEmpWage companyEmpWage);
+    void computeEmpWage(ArrayList<CompanyEmpWage> companyEmpWages);
 }
